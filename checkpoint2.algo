@@ -1,0 +1,135 @@
+ALGORITHM Prob1
+VAR
+    arr1 : ARRAY_OF INTEGER[4];
+    arr2 : ARRAY_OF INTEGER[5];
+    sum : INTEGER := 0 ;
+    i : INTEGER;
+    sumArr : ARRAY_OF INTEGER[];
+    sumArrIndex : INTEGER := 0;
+
+BEGIN
+    arr1 := {3,1,7,9};
+    arr2 := {2,4,1,9,3};
+    FOR i FROM 0 TO arr1.length-1 STEP step DO
+        IF (arr2.includes(arr1[i])=FALSE) THEN
+            sum := sum + arr1[i];
+            sumArr[sumArrIndex] := arr1[i];
+            sumArrIndex := sumArrIndex + 1;
+        END_IF
+    END_FOR
+    FOR i FROM 0 TO arr2.length-1 STEP step DO
+        IF (arr1.includes(arr2[i])=FALSE) THEN
+            sum := sum + arr2[i];
+            sumArr[sumArrIndex] := arr2[i];
+            sumArrIndex := sumArrIndex + 1;
+        END_IF
+    END_FOR
+    write ("sum of elements is: ",sum);
+    write ("array of distinct elements: ",sumArr);
+
+END
+ALGORITHM prob2
+VAR
+
+   htab1 : HASH_TABLE<INTEGER,INTEGER>;
+   htab2 : HASH_TABLE<INTEGER,INTEGER>;
+   i : INTEGER;
+   sum : INTEGER := 0 ;
+   sumTab : HASH_TABLE<INTEGER,INTEGER>;
+   sumTabSize : INTEGER := 0;
+ 
+BEGIN
+   htab1.insert(0,3);
+   htab1.insert(1,1);
+   htab1.insert(2,7);
+   htab1.insert(3,9);
+
+   htab2.insert(0,2);
+   htab2.insert(1,4);
+   htab2.insert(2,1);
+   htab2.insert(3,9);
+   htab2.insert(4,3);
+
+    FOR i FROM 0 TO 3 STEP step DO
+        IF(htab2.lookup(htab1(i))=FALSE) THEN
+            sum := sum + htab1.get(i);
+            sumTab.insert(sumTabSize,htab1.get(i));
+            sumTabSize := sumTabSize + 1;
+        END_IF
+    END_FOR
+    FOR i FROM 0 TO 4 STEP step DO
+        IF(htab1.lookup(htab2(i))=FALSE) THEN
+            sum := sum + htab2.get(i);
+            sumTab.insert(sumTabSize,htab2.get(i));
+            sumTabSize := sumTabSize + 1;
+        END_IF
+    END_FOR
+    write ("sum of elements is: ",sum);
+    write ("table of distinct elements: ");
+    FOR i FROM 0 TO sumTabSize STEP step DO
+        write(sumTab.get(i));
+    END_FOR
+END
+ALGORITHM partie1
+VAR
+    set1 : ARRAY_OF INTEGER[4]; 
+    set2 : ARRAY_OF INTEGER[5]; 
+   i : INTEGER;
+   set3_length : INTEGER := 0;
+   set3 : ARRAY_OF INTEGER[]; 
+   sum_overlapping : INTEGER := 0;
+BEGIN
+    set1 := {3,1,7,9};
+    set2 := {2,4,1,9,3};
+    FOR i FROM 0 TO set1.length-1 STEP step  DO
+       IF (set2.includes(set1[i])) THEN
+       sum_overlapping := sum_overlapping + set1[i];
+       set3[set3_length] := set1[i] ;
+       set3_length := set3_length +1 ;
+       END_IF
+    END_FOR
+
+END
+
+ALGORITHM partie2
+VAR
+
+   htab1 : HASH_TABLE<INTEGER,INTEGER>;
+   htab2 : HASH_TABLE<INTEGER,INTEGER>;
+   i : INTEGER;
+   sum : INTEGER := 0 ;
+   sumTab : HASH_TABLE<INTEGER,INTEGER>;
+   sumTabSize : INTEGER := 0;
+ 
+BEGIN
+   htab1.insert(0,3);
+   htab1.insert(1,1);
+   htab1.insert(2,7);
+   htab1.insert(3,9);
+
+   htab2.insert(0,2);
+   htab2.insert(1,4);
+   htab2.insert(2,1);
+   htab2.insert(3,9);
+   htab2.insert(4,3);
+
+    FOR i FROM 0 TO 3 STEP step DO
+        IF(htab2.lookup(htab1(i))) THEN
+            sum := sum + htab1.get(i);
+            sumTab.insert(sumTabSize,htab1.get(i));
+            sumTabSize := sumTabSize + 1;
+        END_IF
+    END_FOR
+    FOR i FROM 0 TO 4 STEP step DO
+        IF(htab1.lookup(htab2(i))) THEN
+            sum := sum + htab2.get(i);
+            sumTab.insert(sumTabSize,htab2.get(i));
+            sumTabSize := sumTabSize + 1;
+        END_IF
+    END_FOR
+    write ("sum of elements is: ",sum);
+    write ("table of overlapping elements: ");
+    FOR i FROM 0 TO sumTabSize STEP step DO
+        write(sumTab.get(i));
+    END_FOR
+END
